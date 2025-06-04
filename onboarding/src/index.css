@@ -1,72 +1,129 @@
 @import "tailwindcss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+  ------------------------------------
+  Base Styles & CSS Variables
+  ------------------------------------
+  Define foundational styles and custom properties for consistency.
+*/
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Color Palette (define primary, accent, text, and background colors) */
+  --color-primary: #3b82f6; /* Tailwind blue-500 */
+  --color-primary-dark: #2563eb; /* Tailwind blue-600 */
+  --color-accent: #8b5cf6; /* Tailwind purple-500 */
+  --color-accent-dark: #7c3aed; /* Tailwind purple-600 */
+  --color-success: #22c55e; /* Tailwind green-500 */
+  --color-text-dark: #1f2937; /* Tailwind gray-900 */
+  --color-text-light: #f9fafb; /* Tailwind gray-50 */
+  --color-background-light: #ffffff;
+  --color-background-dark: #1a202c; /* A slightly darker background for dark mode */
+  --color-card-background-light: #ffffff;
+  --color-card-background-dark: #2d3748;
+
+  /* Typography */
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif; /* Prefer a specific, modern font like Inter */
   line-height: 1.5;
   font-weight: 400;
 
+  /* Global Color Scheme */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text-dark); /* Default text color for light mode */
+  background-color: var(--color-background-light); /* Default background color for light mode */
 
+  /* Font Rendering Enhancements */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--color-text-light); /* Text color for dark mode */
+    background-color: var(--color-background-dark); /* Background color for dark mode */
+  }
+
+  /* Adjust card background for dark mode if needed, though Tailwind classes usually handle this */
+  /* This is an example, typically you'd use Tailwind's dark:bg-gray-800 on the component directly */
+  .bg-white {
+    background-color: var(--color-card-background-dark) !important;
+  }
 }
 
+/*
+  ------------------------------------
+  Global HTML Element Overrides
+  ------------------------------------
+  Minimal overrides for basic HTML elements.
+*/
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  /* Ensure a smooth background transition for theme changes */
+  transition: background-color 0.3s ease;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/*
+  ------------------------------------
+  Link Styles (Consider using Tailwind classes directly in JSX)
+  ------------------------------------
+*/
+a {
   font-weight: 500;
-  font-color:rgb(0, 0, 0);
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: var(--color-primary); /* Use primary color for links */
+  text-decoration: none; /* No underline by default */
+  transition: color 0.2s ease-in-out; /* Smooth transition for hover */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline; /* Underline on hover for better UX */
+}
+
+/*
+  ------------------------------------
+  Button Component Styles
+  ------------------------------------
+  Defining reusable button styles using @layer components.
+  Each button type will now directly apply all necessary utility classes.
+*/
+@layer components {
+  .btn-primary {
+    /* Base styles for all buttons */
+    @apply rounded-lg px-6 py-2 text-base font-medium cursor-pointer transition-all duration-300;
+    /* Specific styles for primary button */
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md border border-transparent;
   }
-  a:hover {
-    color: #747bff;
+  .btn-secondary {
+    /* Base styles for all buttons */
+    @apply rounded-lg px-6 py-2 text-base font-medium cursor-pointer transition-all duration-300;
+    /* Specific styles for secondary button (Back button) */
+    @apply bg-gray-200 text-gray-800 border border-gray-300 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400;
   }
-  button {
-    background-color: #f9f9f9;
+  .btn-accent {
+    /* Base styles for all buttons */
+    @apply rounded-lg px-6 py-2 text-base font-medium cursor-pointer transition-all duration-300;
+    /* Specific styles for accent button (Submit button) */
+    @apply bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md border border-transparent;
   }
+}
+
+/*
+  ------------------------------------
+  Utility and Animation Overrides (if necessary)
+  ------------------------------------
+*/
+
+/* Optional: If you use any global focus visible styles beyond Tailwind's defaults */
+*:focus-visible {
+  outline: 2px solid var(--color-primary-dark); /* A more subtle but clear focus indicator */
+  outline-offset: 2px;
+  border-radius: 4px; /* Match the border-radius of elements */
 }
