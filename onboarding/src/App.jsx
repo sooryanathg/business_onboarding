@@ -4,10 +4,13 @@ import Dashboard from './Dashboard';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<OnboardingWizard />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
+    <div className="w-full min-h-screen">
+      <Routes>
+        <Route path="/" element={<OnboardingWizard />} />
+        <Route path="/onboarding" element={<OnboardingWizard />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+      </Routes>
+    </div>
   );
 }
 
