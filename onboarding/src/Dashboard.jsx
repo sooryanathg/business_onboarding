@@ -85,35 +85,35 @@ const Dashboard = () => {
   };
 
   const cardVariants = {
-    initial: { 
+    initial: {
       scale: 1,
       rotateX: 0,
       rotateY: 0,
-      boxShadow: isDarkMode 
-        ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" 
+      boxShadow: isDarkMode
+        ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
         : "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
     },
     hover: {
       scale: 1.03,
       rotateX: 5,
       rotateY: 5,
-      boxShadow: isDarkMode 
-        ? "0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)" 
+      boxShadow: isDarkMode
+        ? "0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05)"
         : "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)",
-      transition: { 
+      transition: {
         duration: 0.3,
         ease: "easeOut"
       }
     },
-    tap: { 
+    tap: {
       scale: 0.98,
       rotateX: 0,
       rotateY: 0,
     },
     active: {
       scale: 1.05,
-      boxShadow: isDarkMode 
-        ? "0 25px 50px -12px rgba(59, 130, 246, 0.4), 0 0 0 2px rgba(59, 130, 246, 0.5)" 
+      boxShadow: isDarkMode
+        ? "0 25px 50px -12px rgba(59, 130, 246, 0.4), 0 0 0 2px rgba(59, 130, 246, 0.5)"
         : "0 25px 50px -12px rgba(59, 130, 246, 0.25), 0 0 0 2px rgba(59, 130, 246, 0.3)",
       transition: { duration: 0.2 }
     }
@@ -128,20 +128,19 @@ const Dashboard = () => {
   }));
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`min-h-screen relative overflow-hidden transition-all duration-700 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white' 
+        isDarkMode
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900'
       }`}
       style={{
-        backgroundImage: isDarkMode 
+        backgroundImage: isDarkMode
           ? `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15) 0%, transparent 50%)`
           : `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.08) 0%, transparent 50%)`
       }}
     >
-      {/* Floating Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         {floatingElements.map((element) => (
           <motion.div
@@ -169,9 +168,8 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Neural Network Grid Pattern */}
       <div className="fixed inset-0 pointer-events-none opacity-30">
-        <div className={`w-full h-full ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`} 
+        <div className={`w-full h-full ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
              style={{
                backgroundImage: `radial-gradient(circle, ${isDarkMode ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)'} 1px, transparent 1px)`,
                backgroundSize: '50px 50px',
@@ -186,7 +184,6 @@ const Dashboard = () => {
         variants={containerVariants}
         style={{ y: yTransform, scale: scaleTransform }}
       >
-        {/* Header */}
         <motion.header
           className="mb-12 text-center relative"
           variants={itemVariants}
@@ -201,8 +198,8 @@ const Dashboard = () => {
             </h1>
             <div className={`h-1 w-32 mx-auto bg-gradient-to-r ${isDarkMode ? 'from-blue-400 to-purple-400' : 'from-blue-600 to-purple-600'} rounded-full`} />
           </motion.div>
-          <motion.p 
-            className={`text-xl sm:text-2xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto leading-relaxed`}
+          <motion.p
+            className={`text-xl sm:text-2xl ${isDarkMode ? 'text-black' : 'text-grey-600'} max-w-2xl mx-auto leading-relaxed`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -211,7 +208,6 @@ const Dashboard = () => {
           </motion.p>
         </motion.header>
 
-        {/* User Info Card */}
         <motion.section
           className={`${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'} backdrop-blur-xl rounded-3xl p-8 mb-12 border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'} relative overflow-hidden`}
           variants={itemVariants}
@@ -256,7 +252,6 @@ const Dashboard = () => {
           </motion.div>
         </motion.section>
 
-        {/* Metrics Grid */}
         <motion.section className="mb-12" variants={itemVariants}>
           <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Key Metrics
@@ -301,9 +296,7 @@ const Dashboard = () => {
           </div>
         </motion.section>
 
-        {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Main Performance Chart */}
           <motion.div
             className={`${isDarkMode ? 'bg-gray-800/60' : 'bg-white/80'} backdrop-blur-xl rounded-3xl p-8 border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'} relative overflow-hidden`}
             variants={itemVariants}
@@ -350,7 +343,6 @@ const Dashboard = () => {
             </div>
           </motion.div>
 
-          {/* Pie Chart */}
           <motion.div
             className={`${isDarkMode ? 'bg-gray-800/60' : 'bg-white/80'} backdrop-blur-xl rounded-3xl p-8 border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'} relative overflow-hidden`}
             variants={itemVariants}
@@ -404,7 +396,6 @@ const Dashboard = () => {
           </motion.div>
         </div>
 
-        {/* Real-time Activity Feed */}
         <motion.section
           className={`${isDarkMode ? 'bg-gray-800/60' : 'bg-white/80'} backdrop-blur-xl rounded-3xl p-8 border ${isDarkMode ? 'border-gray-700/50' : 'border-gray-200/50'} relative overflow-hidden`}
           variants={itemVariants}

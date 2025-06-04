@@ -12,15 +12,15 @@ const OnboardingWizard = () => {
     companyName: '',
     industry: '',
     size: '',
-    theme: 'dark', // Consider default to 'light' or system preference
+    theme: 'dark', 
     layout: 'grid',
   });
   const [errors, setErrors] = useState({});
   const [direction, setDirection] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // Mouse position removed for cleaner background
+  
 
-  // ... (unchanged useEffects for localStorage and mouse tracking if kept)
+  
   useEffect(() => {
     const savedData = localStorage.getItem('onboardingData');
     if (savedData) {
@@ -81,7 +81,7 @@ const OnboardingWizard = () => {
   const handleSubmit = async () => {
     if (validateStep()) {
       setIsSubmitting(true);
-      // Simulate API call
+      
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log('Onboarding data submitted:', formData);
       localStorage.removeItem('onboardingData');
@@ -132,8 +132,8 @@ const OnboardingWizard = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden bg-gray-50"> {/* ALTERNATIVE: Solid, light background */}
-      {/* Subtle background element if desired (e.g., a very faint pattern or abstract shape) */}
+    <div className="min-h-screen w-full relative overflow-hidden bg-gray-50"> 
+      
       <div className="absolute inset-0 opacity-10"
            style={{ background: 'url(/path-to-subtle-pattern.svg) repeat' }}>
       </div>
@@ -145,14 +145,14 @@ const OnboardingWizard = () => {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Header */}
+          
           <div className="relative z-10 text-center mb-10">
-            {/* ALTERNATIVE: Removed Sparkles, simpler title */}
+            
             <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Welcome</h1>
-            <p className="text-gray-600 text-lg font-medium">Let's get you set up</p> {/* ALTERNATIVE: Simpler subtitle */}
+            <p className="text-gray-600 text-lg font-medium">Let's get you set up</p> 
           </div>
 
-          {/* Enhanced Progress Bar */}
+          
           <div className="mb-10">
             <div className="flex justify-between items-center mb-6">
               {steps.map((stepInfo, index) => {
@@ -167,14 +167,14 @@ const OnboardingWizard = () => {
                     whileHover={{ scale: 1.05 }}
                   >
                     <motion.div
-                      className={`w-14 h-14 rounded-full flex items-center justify-center mb-2 ${ /* ALTERNATIVE: Smaller, round */
+                      className={`w-14 h-14 rounded-full flex items-center justify-center mb-2 ${ 
                         isCompleted
-                          ? 'bg-emerald-500 shadow-md shadow-emerald-200' // ALTERNATIVE: Solid green for completed
+                          ? 'bg-emerald-500 shadow-md shadow-emerald-200' 
                           : isActive
-                          ? 'bg-blue-600 shadow-md shadow-blue-200' // ALTERNATIVE: Brand primary blue for active
-                          : 'bg-gray-200 border border-gray-300' // ALTERNATIVE: Light grey for inactive
+                          ? 'bg-blue-600 shadow-md shadow-blue-200' 
+                          : 'bg-gray-200 border border-gray-300' 
                       }`}
-                      animate={isActive ? { scale: [1, 1.1, 1] } : {}} // Simpler pulse for active
+                      animate={isActive ? { scale: [1, 1.1, 1] } : {}} 
                       transition={{ duration: 0.5 }}
                     >
                       {isCompleted ? (
@@ -196,11 +196,11 @@ const OnboardingWizard = () => {
               })}
             </div>
 
-            {/* Progress bar */}
+            
             <div className="relative">
-              <div className="w-full bg-gray-200 rounded-full h-2"> {/* ALTERNATIVE: Lighter track, thinner */}
+              <div className="w-full bg-gray-200 rounded-full h-2"> 
                 <motion.div
-                  className="bg-blue-600 h-2 rounded-full" // ALTERNATIVE: Solid primary blue fill
+                  className="bg-blue-600 h-2 rounded-full" 
                   initial={{ width: 0 }}
                   animate={{ width: `${progressPercentage}%` }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -209,7 +209,7 @@ const OnboardingWizard = () => {
             </div>
           </div>
 
-          {/* Form Steps */}
+          
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={step}
@@ -220,7 +220,7 @@ const OnboardingWizard = () => {
               exit="exit"
               className="min-h-[300px]"
             >
-              {/* Step 1: Personal Info */}
+              
               {step === 1 && (
                 <div className="space-y-6">
                   <motion.h2
@@ -229,7 +229,7 @@ const OnboardingWizard = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <User className="w-6 h-6 text-blue-500" /> {/* ALTERNATIVE: Primary blue icon */}
+                    <User className="w-6 h-6 text-blue-500" /> 
                     Personal Details
                   </motion.h2>
 
@@ -244,9 +244,9 @@ const OnboardingWizard = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-white border ${ /* ALTERNATIVE: Solid white background, less padding */
+                      className={`w-full px-4 py-3 bg-white border ${ 
                         errors.name ? 'border-red-500' : 'border-gray-300'
-                      } rounded-lg text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200`} /* ALTERNATIVE: Clear focus ring */
+                      } rounded-lg text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200`} 
                       placeholder="Enter your full name"
                     />
                     {errors.name && (
@@ -289,7 +289,7 @@ const OnboardingWizard = () => {
                 </div>
               )}
 
-              {/* Step 2: Business Info - apply similar class changes */}
+              
               {step === 2 && (
                 <div className="space-y-6">
                   <motion.h2
@@ -385,7 +385,7 @@ const OnboardingWizard = () => {
                 </div>
               )}
 
-              {/* Step 3: Preferences - apply similar class changes */}
+              
               {step === 3 && (
                 <div className="space-y-6">
                   <motion.h2
@@ -411,9 +411,9 @@ const OnboardingWizard = () => {
                       ].map((theme) => (
                         <motion.label
                           key={theme.value}
-                          className={`relative flex items-center justify-center p-4 rounded-lg cursor-pointer border-2 transition-all duration-200 ${ /* ALTERNATIVE: Smaller radius */
+                          className={`relative flex items-center justify-center p-4 rounded-lg cursor-pointer border-2 transition-all duration-200 ${ 
                             formData.theme === theme.value
-                              ? 'border-blue-500 bg-blue-50' // ALTERNATIVE: Light primary background for selected
+                              ? 'border-blue-500 bg-blue-50' 
                               : 'border-gray-300 bg-white hover:border-gray-400'
                           }`}
                           whileHover={{ scale: 1.02 }}
@@ -437,7 +437,7 @@ const OnboardingWizard = () => {
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
                             >
-                              <Check className="w-5 h-5 text-blue-600" /> {/* ALTERNATIVE: Primary blue check */}
+                              <Check className="w-5 h-5 text-blue-600" /> 
                             </motion.div>
                           )}
                         </motion.label>
@@ -496,7 +496,7 @@ const OnboardingWizard = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Buttons */}
+          
           <motion.div
             className={`flex ${step > 1 ? 'justify-between' : 'justify-end'} mt-10 gap-4`}
             initial={{ opacity: 0, y: 20 }}
@@ -506,7 +506,7 @@ const OnboardingWizard = () => {
             {step > 1 && (
               <motion.button
                 onClick={handleBack}
-                className="flex items-center gap-2 px-6 py-3 bg-transparent border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-200" /* ALTERNATIVE: Ghost button style */
+                className="flex items-center gap-2 px-6 py-3 bg-transparent border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-200" 
                 whileHover={{ scale: 1.02, x: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -518,7 +518,7 @@ const OnboardingWizard = () => {
             {step < 3 ? (
               <motion.button
                 onClick={handleNext}
-                className="flex items-center gap-2 px-8 py-3 bg-blue-600 rounded-lg text-white font-bold shadow-md shadow-blue-200 hover:bg-blue-700 transition-all duration-200" /* ALTERNATIVE: Solid primary button */
+                className="flex items-center gap-2 px-8 py-3 bg-blue-600 rounded-lg text-white font-bold shadow-md shadow-blue-200 hover:bg-blue-700 transition-all duration-200" 
                 whileHover={{ scale: 1.02, x: 2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -529,7 +529,7 @@ const OnboardingWizard = () => {
               <motion.button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="flex items-center gap-2 px-8 py-3 bg-emerald-500 rounded-lg text-white font-bold shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" // ALTERNATIVE: Solid green submit
+                className="flex items-center gap-2 px-8 py-3 bg-emerald-500 rounded-lg text-white font-bold shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" 
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
@@ -552,15 +552,15 @@ const OnboardingWizard = () => {
             )}
           </motion.div>
 
-          {/* Trust indicators */}
+          
           <motion.div
-            className="flex items-center justify-center gap-6 mt-8 text-gray-500 text-sm" /* ALTERNATIVE: Darker text */
+            className="flex items-center justify-center gap-6 mt-8 text-gray-500 text-sm" 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
             <div className="flex items-center gap-1">
-              <Shield className="w-4 h-4 text-gray-400" /> {/* ALTERNATIVE: Darker icons */}
+              <Shield className="w-4 h-4 text-gray-400" /> 
               <span>Secure</span>
             </div>
             <div className="flex items-center gap-1">
